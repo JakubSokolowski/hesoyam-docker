@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+  mongodb:
+    restart: always
+    image: mongo
+    container_name: hesoyam-mongo
+    ports:
+      - '27017:27017'
+  mongo-seed:
+    build: ./hesoyam-server/mongo-seed
+    depends_on:
+      - mongodb
+    links:
+      - mongodb
+  web-server:
+    restart: always
+    container_name: hes-server
+    build: ./hesoyam-server
+    ports:
+      - '8081:8081'
+    volumes:
+      - '/tmp'
+    depends_on:
+      - mongodb
+      - mongo-seed
+    links:
+      - mongodb
+  web-client:
+    container_name: hes-client
+    build: ./hesoyam-client
+    ports:
+      - '4200:4200'
+    volumes:
+      - './hesoyam-client:/usr/src/app'
+      - '/usr/src/app/node_modules'
+    depends_on:
+      - web-server
+      - mongodb
+      - mongo-seed
+    links:
+      - web-server
