@@ -1,6 +1,0 @@
-[submodule "hesoyam-server"]
-	path = hesoyam-server
-	url = https://github.com/JakubSokolowski/hesoyam-server.git
-[submodule "hesoyam-client"]
-	path = hesoyam-client
-	url = https://github.com/JakubSokolowski/hesoyam-client.git
