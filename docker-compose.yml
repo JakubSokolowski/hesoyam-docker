@@ -30,6 +30,7 @@ services:
     build: ./hesoyam-client
     ports:
       - "4200:80"
+      - "4201:4200"
     depends_on:
       - web-server
       - mongodb
